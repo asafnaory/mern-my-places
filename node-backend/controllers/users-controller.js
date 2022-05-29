@@ -25,10 +25,10 @@ const signup = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return next(
       new HttpError("Invalid inputs passed, please check your data", 422)
-      );
-    }
-    const { name, email, password } = req.body;
-    
+    );
+  }
+  const { name, email, password } = req.body;
+
   let existingUser;
   try {
     existingUser = await User.findOne({ email });
@@ -70,7 +70,7 @@ const signup = async (req, res, next) => {
   try {
     toekn = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
-      "supersecret_dont_share",
+      process.env.JET_KEY,
       { expiresIn: "1h" }
     );
   } catch (e) {
@@ -120,7 +120,7 @@ const login = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      "supersecret_dont_share",
+      process.env.JET_KEY,
       { expiresIn: "1h" }
     );
   } catch (e) {
@@ -128,7 +128,7 @@ const login = async (req, res, next) => {
     return next(error);
   }
   console.log(existingUser, token);
-  res.json({ userId: existingUser.id, email: existingUser.email, token});
+  res.json({ userId: existingUser.id, email: existingUser.email, token });
 };
 
 exports.getUsers = getUsers;

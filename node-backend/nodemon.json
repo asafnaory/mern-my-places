@@ -1,0 +1,9 @@
+{
+  "env": {
+    "DB_USER": "asafnaory",
+    "DB_PASSWORD": "VmlE6uYCMJVjKv1F",
+    "DB_NAME": "mern",
+    "GOOGLE_API_KEY": "AIzaSyBrPUumCybpzO7hEZ5c3cKtKsb0sKPApAk",
+    "JET_KEY": "supersecret_dont_share"
+  }
+}

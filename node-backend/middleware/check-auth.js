@@ -2,7 +2,7 @@ const HttpError = require("../Models/http-error");
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-  if(req.method === "OPTIONS"){
+  if (req.method === "OPTIONS") {
     return next();
   }
   try {
@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
       const err = new HttpError("Authentication failed!");
       throw new Error(err);
     }
-    const decodedToken = jwt.verify(token, "supersecret_dont_share");
+    const decodedToken = jwt.verify(token, process.env.JET_KEY);
     req.userData = { userId: decodedToken.userId };
     next();
   } catch (e) {
